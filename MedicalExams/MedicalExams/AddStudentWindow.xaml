@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Заголовок -->
+   
         <Border Grid.Row="0" Background="#4CAF50" CornerRadius="5" Padding="10" Margin="0,0,0,15">
             <TextBlock Text="ДОБАВЛЕНИЕ НОВОГО УЧЕНИКА" 
                        FontSize="16" FontWeight="Bold" 
@@ -22,11 +22,11 @@
                        Foreground="White"/>
         </Border>
 
-        <!-- Форма ввода (с прокруткой) -->
+    
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
             <StackPanel>
 
-                <!-- Блок: ФИО -->
+           
                 <GroupBox Header="ФИО ученика" Margin="0,0,0,10" Padding="10">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -50,7 +50,7 @@
                     </Grid>
                 </GroupBox>
 
-                <!-- Блок: Основные данные -->
+           
                 <GroupBox Header="Основные данные" Margin="0,0,0,10" Padding="10">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -81,7 +81,7 @@
                     </Grid>
                 </GroupBox>
 
-                <!-- Блок: Контакты -->
+        
                 <GroupBox Header="Контактная информация" Margin="0,0,0,10" Padding="10">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -105,7 +105,7 @@
                     </Grid>
                 </GroupBox>
 
-                <!-- Блок: Примечания -->
+       
                 <GroupBox Header="Дополнительная информация" Margin="0,0,0,10" Padding="10">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -123,14 +123,14 @@
                     </Grid>
                 </GroupBox>
 
-                <!-- Подсказка -->
+       
                 <TextBlock Text="* - обязательные поля" 
                            FontSize="11" FontStyle="Italic" 
                            Foreground="Gray" Margin="5"/>
             </StackPanel>
         </ScrollViewer>
 
-        <!-- Кнопки -->
+  
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
             <Button x:Name="SaveBtn" Content="Сохранить" Width="120" Height="35" 
                     Margin="5" Click="SaveBtn_Click"
