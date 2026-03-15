@@ -18,27 +18,27 @@ namespace MedicalExams.Data
 
         static DataStorage()
         {
-            // Создаем папку для данных, если её нет
+
             if (!Directory.Exists(DataFolder))
             {
                 Directory.CreateDirectory(DataFolder);
             }
         }
 
-        // Сохранение всех данных
+
         public static void SaveAll(List<Student> students, List<MedicalExam> exams, int nextStudentId, int nextExamId)
         {
             try
             {
-                // Сохраняем учеников
+      
                 string studentsJson = JsonConvert.SerializeObject(students, Formatting.Indented);
                 File.WriteAllText(StudentsFile, studentsJson);
 
-                // Сохраняем медосмотры
+         
                 string examsJson = JsonConvert.SerializeObject(exams, Formatting.Indented);
                 File.WriteAllText(ExamsFile, examsJson);
 
-                // Сохраняем счетчики
+            
                 var counters = new
                 {
                     NextStudentId = nextStudentId,
@@ -56,7 +56,7 @@ namespace MedicalExams.Data
             }
         }
 
-        // Загрузка учеников
+    
         public static List<Student> LoadStudents()
         {
             try
@@ -75,7 +75,7 @@ namespace MedicalExams.Data
             return new List<Student>();
         }
 
-        // Загрузка медосмотров
+   
         public static List<MedicalExam> LoadExams()
         {
             try
@@ -94,7 +94,7 @@ namespace MedicalExams.Data
             return new List<MedicalExam>();
         }
 
-        // Загрузка счетчиков
+    
         public static (int nextStudentId, int nextExamId) LoadCounters()
         {
             try
@@ -111,10 +111,10 @@ namespace MedicalExams.Data
                 System.Windows.MessageBox.Show($"Ошибка загрузки счетчиков: {ex.Message}",
                     "Ошибка", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
             }
-            return (1, 1); // Значения по умолчанию
+            return (1, 1);
         }
 
-        // Получение пути к папке с данными (для информации)
+      
         public static string GetDataFolderPath()
         {
             return DataFolder;
