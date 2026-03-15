@@ -34,18 +34,18 @@ namespace MedicalExams
 
         private void LoadFilters()
         {
-            // Фильтр классов
+       
             var classes = _allStudents.Select(s => s.ClassName).Distinct().OrderBy(c => c).ToList();
             classes.Insert(0, "Все классы");
             ClassFilterCombo.ItemsSource = classes;
             ClassFilterCombo.SelectedIndex = 0;
 
-            // Фильтр групп здоровья
+      
             var healthGroups = new List<string> { "Все", "1", "2", "3", "4", "5" };
             HealthGroupFilterCombo.ItemsSource = healthGroups;
             HealthGroupFilterCombo.SelectedIndex = 0;
 
-            // Фильтр статуса допуска
+  
             var admissionStatuses = new List<string> { "Все", "Действует", "Истекает", "Просрочен", "Нет допуска" };
             AdmissionFilterCombo.ItemsSource = admissionStatuses;
             AdmissionFilterCombo.SelectedIndex = 0;
@@ -95,20 +95,20 @@ namespace MedicalExams
         {
             var filtered = _allStudents.AsEnumerable();
 
-            // Фильтр по классу
+
             if (ClassFilterCombo.SelectedItem != null && ClassFilterCombo.SelectedItem.ToString() != "Все классы")
             {
                 filtered = filtered.Where(s => s.ClassName == ClassFilterCombo.SelectedItem.ToString());
             }
 
-            // Фильтр по группе здоровья
+    
             if (HealthGroupFilterCombo.SelectedItem != null && HealthGroupFilterCombo.SelectedItem.ToString() != "Все")
             {
                 int group = int.Parse(HealthGroupFilterCombo.SelectedItem.ToString());
                 filtered = filtered.Where(s => s.HealthGroup == group);
             }
 
-            // Поиск по тексту
+    
             if (!string.IsNullOrWhiteSpace(SearchBox.Text))
             {
                 string search = SearchBox.Text.ToLower();
@@ -145,7 +145,7 @@ namespace MedicalExams
 
                 if (addWindow.IsSaved)
                 {
-                    // Обновляем данные
+              
                     UpdateStatistics();
                     UpdateReminders();
                 }
@@ -193,7 +193,7 @@ namespace MedicalExams
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            MedicalData.SaveData(); // Сохраняем данные при закрытии
+            MedicalData.SaveData(); 
         }
     }
 }
