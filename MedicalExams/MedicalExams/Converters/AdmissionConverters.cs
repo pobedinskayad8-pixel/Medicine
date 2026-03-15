@@ -7,7 +7,7 @@ using MedicalExams.Models;
 
 namespace MedicalExams.Converters
 {
-    // Конвертер для получения статуса допуска
+
     public class AdmissionStatusConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -35,7 +35,7 @@ namespace MedicalExams.Converters
         }
     }
 
-    // Конвертер для проверки наличия действующего допуска
+
     public class HasCurrentAdmissionConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -54,7 +54,7 @@ namespace MedicalExams.Converters
         }
     }
 
-    // Конвертер для проверки истекающего допуска
+
     public class HasExpiringAdmissionConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -73,7 +73,7 @@ namespace MedicalExams.Converters
         }
     }
 
-    // Конвертер для проверки просроченного допуска
+ 
     public class HasExpiredAdmissionConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -92,7 +92,7 @@ namespace MedicalExams.Converters
         }
     }
 
-    // Конвертер для получения списка осмотров ученика
+
     public class StudentExamsConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
