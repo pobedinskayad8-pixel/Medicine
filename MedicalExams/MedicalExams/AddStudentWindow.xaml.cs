@@ -8,30 +8,30 @@ namespace MedicalExams
 {
     public partial class AddStudentWindow : Window
     {
-        // Конструктор для добавления нового ученика
+
         public AddStudentWindow()
         {
             InitializeComponent();
 
-            // Устанавливаем дату рождения по умолчанию (примерно 14 лет назад)
+      
             BirthDatePicker.SelectedDate = DateTime.Now.AddYears(-14);
 
-            // Выбираем первую группу здоровья по умолчанию
+   
             if (HealthGroupCombo.Items.Count > 0)
                 HealthGroupCombo.SelectedIndex = 0;
         }
 
-        // Конструктор для редактирования существующего ученика
+    
         public AddStudentWindow(Student student) : this()
         {
-            // Заполняем поля данными ученика
+       
             LastNameBox.Text = student.LastName;
             FirstNameBox.Text = student.FirstName;
             MiddleNameBox.Text = student.MiddleName;
             BirthDatePicker.SelectedDate = student.BirthDate;
             ClassBox.Text = student.ClassName;
 
-            // Выбираем соответствующую группу здоровья
+      
             foreach (ComboBoxItem item in HealthGroupCombo.Items)
             {
                 if (item.Tag.ToString() == student.HealthGroup.ToString())
@@ -46,15 +46,15 @@ namespace MedicalExams
             AddressBox.Text = student.Address;
             NotesBox.Text = student.Notes;
 
-            // Меняем заголовок окна
+    
             Title = "Редактирование ученика";
             (FindName("SaveBtn") as Button).Content = "Обновить";
         }
 
-        // Обработчик кнопки Сохранить
+
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Валидация обязательных полей
+      
             if (string.IsNullOrWhiteSpace(LastNameBox.Text))
             {
                 MessageBox.Show("Введите фамилию", "Ошибка",
@@ -97,14 +97,14 @@ namespace MedicalExams
 
             try
             {
-                // Получаем выбранную группу здоровья
+          
                 int healthGroup = 1;
                 if (HealthGroupCombo.SelectedItem is ComboBoxItem item)
                 {
                     healthGroup = int.Parse(item.Tag.ToString());
                 }
 
-                // Создаем нового ученика
+           
                 var student = new Student
                 {
                     Id = MedicalData.GetNextStudentId(),
@@ -120,11 +120,11 @@ namespace MedicalExams
                     Notes = NotesBox.Text?.Trim() ?? ""
                 };
 
-                // Добавляем в хранилище
+          
                 MedicalData.Students.Add(student);
-                MedicalData.SaveData(); // Сохраняем изменения
+                MedicalData.SaveData(); 
 
-                // Успешное завершение
+     
                 DialogResult = true;
                 Close();
             }
@@ -135,7 +135,7 @@ namespace MedicalExams
             }
         }
 
-        // Обработчик кнопки Отмена
+    
         private void CancelBtn_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
