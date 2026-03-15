@@ -1,0 +1,92 @@
+﻿<Window x:Class="MedicalExams.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Медосмотры и допуски к занятиям" 
+        Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Text="УЧЕТ МЕДОСМОТРОВ И ДОПУСКОВ УЧАЩИХСЯ" 
+                   FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+        <!-- Панель напоминаний -->
+        <Border Grid.Row="1" Background="#FFF0F0" BorderBrush="Red" BorderThickness="1" CornerRadius="5" Padding="5" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock x:Name="ReminderText" Text="Напоминаний нет" FontWeight="Bold" Foreground="Red" FontSize="12"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Панель фильтрации и поиска -->
+        <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,0,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Класс:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <ComboBox x:Name="ClassFilterCombo" Grid.Column="1" Margin="5" SelectionChanged="Filter_Changed"/>
+
+                <TextBlock Grid.Column="2" Text="Группа здоровья:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+                <ComboBox x:Name="HealthGroupFilterCombo" Grid.Column="3" Margin="5" SelectionChanged="Filter_Changed"/>
+
+                <TextBlock Grid.Column="4" Text="Статус допуска:" VerticalAlignment="Center" Margin="10,0,5,0"/>
+                <ComboBox x:Name="AdmissionFilterCombo" Grid.Column="5" Margin="5" SelectionChanged="Filter_Changed"/>
+
+                <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="Поиск:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBox x:Name="SearchBox" Width="200" Height="25" TextChanged="SearchBox_TextChanged"/>
+                    <Button x:Name="ClearSearchBtn" Content="✕" Width="25" Height="25" Margin="2" Click="ClearSearchBtn_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Основная таблица учеников -->
+        <DataGrid x:Name="StudentsGrid" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionUnit="FullRow" Margin="0,0,0,10">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="120"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="100"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}" Width="120"/>
+                <DataGridTextColumn Header="Класс" Binding="{Binding ClassName}" Width="70"/>
+                <DataGridTextColumn Header="Группа здоровья" Binding="{Binding HealthGroup}" Width="50"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="100"/>
+                <DataGridTextColumn Header="Телефон родителей" Binding="{Binding ParentPhone}" Width="120"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Нижняя панель с кнопками -->
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5">
+            <Button x:Name="AddStudentBtn" Content="Добавить ученика" Width="150" Height="35" Margin="5" Click="AddStudentBtn_Click"/>
+            <Button x:Name="AddExamBtn" Content="Добавить медосмотр" Width="150" Height="35" Margin="5" Click="AddExamBtn_Click"/>
+            <Button x:Name="ReportsBtn" Content="Отчеты" Width="100" Height="35" Margin="5" Click="ReportsBtn_Click"/>
+            <Button x:Name="ExpiringBtn" Content="Истекающие справки" Width="150" Height="35" Margin="5" Click="ExpiringBtn_Click"/>
+            <Button x:Name="ExpiredBtn" Content="Просроченные" Width="120" Height="35" Margin="5" Click="ExpiredBtn_Click"/>
+            <Button x:Name="RefreshBtn" Content="Обновить" Width="100" Height="35" Margin="5" Click="RefreshBtn_Click"/>
+        </StackPanel>
+
+        <!-- Статистика -->
+        <StatusBar Grid.Row="5" Margin="0,10,0,0">
+            <StatusBarItem>
+                <TextBlock x:Name="StatsText" Text="Всего учеников: 0"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
