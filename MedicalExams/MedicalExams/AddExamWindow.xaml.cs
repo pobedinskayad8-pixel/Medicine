@@ -25,18 +25,18 @@ namespace MedicalExams
                 TitleTextBlock.Text = $"МЕДОСМОТР: {_student.FullName}";
             }
 
-            // Устанавливаем даты по умолчанию
+
             ExamDatePicker.SelectedDate = DateTime.Today;
             ExpiryDatePicker.SelectedDate = DateTime.Today.AddYears(1);
 
-            // Выбираем первый элемент в ComboBox
+     
             if (ExamTypeComboBox.Items.Count > 0)
                 ExamTypeComboBox.SelectedIndex = 0;
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // Валидация
+   
             if (ExamDatePicker.SelectedDate == null)
             {
                 MessageBox.Show("Выберите дату осмотра", "Ошибка",
@@ -67,7 +67,7 @@ namespace MedicalExams
 
             try
             {
-                // Получаем выбранный тип осмотра
+         
                 string examType = "Ежегодный";
                 if (ExamTypeComboBox.SelectedItem is ComboBoxItem item)
                 {
@@ -90,7 +90,7 @@ namespace MedicalExams
                 };
 
                 MedicalData.Exams.Add(exam);
-                MedicalData.SaveData(); // Сохраняем изменения
+                MedicalData.SaveData(); 
 
                 MessageBox.Show("Медосмотр успешно добавлен!", "Успех",
                     MessageBoxButton.OK, MessageBoxImage.Information);
@@ -111,7 +111,7 @@ namespace MedicalExams
             this.Close();
         }
 
-        // Свойство для проверки результата
+ 
         public bool IsSaved
         {
             get { return _isSaved; }
