@@ -18,27 +18,27 @@ namespace MedicalExams.Data
             LoadData();
         }
 
-        // Загрузка данных из файлов
+  
         private static void LoadData()
         {
             try
             {
-                // Загружаем учеников
+            
                 Students = DataStorage.LoadStudents();
 
-                // Загружаем медосмотры
+         
                 Exams = DataStorage.LoadExams();
 
-                // Загружаем счетчики
+          
                 var (nextStudentId, nextExamId) = DataStorage.LoadCounters();
                 _nextStudentId = nextStudentId;
                 _nextExamId = nextExamId;
 
-                // Если нет данных, добавляем тестовые
+       
                 if (!Students.Any())
                 {
                     AddTestData();
-                    SaveData(); // Сразу сохраняем тестовые данные
+                    SaveData(); 
                 }
             }
             catch (Exception ex)
@@ -46,7 +46,7 @@ namespace MedicalExams.Data
                 System.Windows.MessageBox.Show($"Ошибка загрузки данных: {ex.Message}",
                     "Ошибка", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
 
-                // Если ошибка, создаем тестовые данные
+           
                 Students.Clear();
                 Exams.Clear();
                 _nextStudentId = 1;
@@ -55,7 +55,7 @@ namespace MedicalExams.Data
             }
         }
 
-        // Сохранение данных в файлы
+    
         public static void SaveData()
         {
             DataStorage.SaveAll(Students, Exams, _nextStudentId, _nextExamId);
@@ -63,7 +63,7 @@ namespace MedicalExams.Data
 
         private static void AddTestData()
         {
-            // Тестовые ученики
+          
             var student1 = new Student
             {
                 Id = _nextStudentId++,
@@ -110,7 +110,7 @@ namespace MedicalExams.Data
             Students.Add(student2);
             Students.Add(student3);
 
-            // Тестовые медосмотры
+        
             Exams.Add(new MedicalExam
             {
                 Id = _nextExamId++,
@@ -176,13 +176,13 @@ namespace MedicalExams.Data
             return _nextExamId++;
         }
 
-        // Получение всех осмотров ученика
+     
         public static List<MedicalExam> GetStudentExams(int studentId)
         {
             return Exams.Where(e => e.StudentId == studentId).OrderByDescending(e => e.ExamDate).ToList();
         }
 
-        // Получение действующего допуска
+   
         public static MedicalExam GetCurrentAdmission(int studentId)
         {
             return Exams.Where(e => e.StudentId == studentId && e.IsAdmitted && e.ExpiryDate >= DateTime.Now)
@@ -190,7 +190,7 @@ namespace MedicalExams.Data
                        .FirstOrDefault();
         }
 
-        // Ученики с истекающими справками
+    
         public static List<Student> GetStudentsWithExpiringExams(int days = 30)
         {
             var expiringExamStudentIds = Exams.Where(e => e.ExpiryDate <= DateTime.Now.AddDays(days) &&
@@ -202,7 +202,7 @@ namespace MedicalExams.Data
             return Students.Where(s => expiringExamStudentIds.Contains(s.Id)).ToList();
         }
 
-        // Ученики с просроченными справками
+      
         public static List<Student> GetStudentsWithExpiredExams()
         {
             var expiredExamStudentIds = Exams.Where(e => e.ExpiryDate < DateTime.Now)
