@@ -18,7 +18,7 @@ namespace MedicalExams
         {
             try
             {
-                // Общая статистика
+       
                 int totalStudents = MedicalData.Students.Count;
                 int totalExams = MedicalData.Exams.Count;
                 int activeExams = MedicalData.Students.Count(s => MedicalData.GetCurrentAdmission(s.Id) != null);
@@ -31,14 +31,14 @@ namespace MedicalExams
                 ExpiringExamsText.Text = $"Истекают в ближайшие 30 дней: {expiringCount}";
                 ExpiredExamsText.Text = $"Просрочено: {expiredCount}";
 
-                // Группы здоровья
+
                 HealthGroup1Text.Text = $"Группа 1: {MedicalData.Students.Count(s => s.HealthGroup == 1)}";
                 HealthGroup2Text.Text = $"Группа 2: {MedicalData.Students.Count(s => s.HealthGroup == 2)}";
                 HealthGroup3Text.Text = $"Группа 3: {MedicalData.Students.Count(s => s.HealthGroup == 3)}";
                 HealthGroup4Text.Text = $"Группа 4: {MedicalData.Students.Count(s => s.HealthGroup == 4)}";
                 HealthGroup5Text.Text = $"Группа 5: {MedicalData.Students.Count(s => s.HealthGroup == 5)}";
 
-                // Классы
+         
                 var classes = MedicalData.Students
                     .Select(s => s.ClassName)
                     .Distinct()
@@ -48,10 +48,10 @@ namespace MedicalExams
 
                 ClassesListBox.ItemsSource = classes;
 
-                // Таблица учеников
+           
                 StudentsReportGrid.ItemsSource = MedicalData.Students.ToList();
 
-                // Просроченные справки
+     
                 var expiredStudents = MedicalData.GetStudentsWithExpiredExams();
                 ExpiredReportGrid.ItemsSource = expiredStudents;
             }
